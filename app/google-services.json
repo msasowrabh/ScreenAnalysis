@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "376726398537",
+    "firebase_url": "https://screenanalysis-be1f7.firebaseio.com",
+    "project_id": "screenanalysis-be1f7",
+    "storage_bucket": "screenanalysis-be1f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376726398537:android:59e8b5e42cd1c717368198",
+        "android_client_info": {
+          "package_name": "com.ptg.screenanalysis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376726398537-7pk11mi86n4v78edfimq587m7ptje3dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdbIw-p3AlLzv2NBXx9MvcoePeaedTh_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376726398537-7pk11mi86n4v78edfimq587m7ptje3dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
