@@ -1,11 +1,6 @@
 package com.ptg.screenanalysis;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.palette.graphics.Palette;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -13,22 +8,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.palette.graphics.Palette;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.text.FirebaseVisionText;
-import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
 import java.io.IOException;
-
-import static androidx.camera.core.CameraX.getContext;
 
 public class Gallery_image extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
@@ -111,15 +107,15 @@ public class Gallery_image extends AppCompatActivity {
     }
 
     private void Recognizetext(Bitmap bitmap) {
-        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
-        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance()
-                .getCloudTextRecognizer();
-        Task<FirebaseVisionText> result =
-                detector.processImage(image)
-                        .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+       int rotationDegree=0;
+        InputImage image = InputImage.fromBitmap(bitmap,rotationDegree);
+        TextRecognizer detector = TextRecognition.getClient();
+        Task<Text> result =
+                detector.process(image)
+                        .addOnSuccessListener(new OnSuccessListener<Text>() {
                             @Override
-                            public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                                String text=firebaseVisionText.getText();
+                            public void onSuccess(Text VisionText) {
+                                String text=VisionText.getText();
                                 Toast.makeText(Gallery_image.this,text,Toast.LENGTH_SHORT).show();
 
                             }
