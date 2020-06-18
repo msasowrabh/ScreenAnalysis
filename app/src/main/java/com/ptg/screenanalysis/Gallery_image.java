@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class Gallery_image extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
-
+    public static String resultText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,8 +115,12 @@ public class Gallery_image extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Text>() {
                             @Override
                             public void onSuccess(Text VisionText) {
-                                String text=VisionText.getText();
-                                Toast.makeText(Gallery_image.this,text,Toast.LENGTH_SHORT).show();
+                                resultText=VisionText.getText();
+                                Log.d("Text from Image",resultText);
+                                Intent intent=new Intent(Gallery_image.this,Gallery_text.class);
+                                intent.putExtra("ResultText",resultText);
+                                startActivity(intent);
+
 
                             }
                         })
