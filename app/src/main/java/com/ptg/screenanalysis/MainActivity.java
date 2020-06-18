@@ -1,5 +1,6 @@
 package com.ptg.screenanalysis;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -38,7 +39,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -145,8 +152,10 @@ public class MainActivity extends AppCompatActivity {
                 imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), new ImageAnalysis.Analyzer() {
                     @Override
                     public void analyze(@NonNull ImageProxy image) {
+                        Bitmap bitmap=toBitmap(image);
 
-                        setPalletecolors(image);
+                        setPalletecolors(bitmap);
+                        RecogniseText(image);
                         //Toast.makeText(MainActivity.this,"analysis",Toast.LENGTH_SHORT).show();
                         image.close();
 
@@ -171,11 +180,35 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setPalletecolors(ImageProxy image) {
-        Bitmap bitmap = null;
+    private void RecogniseText(ImageProxy imageProxy) {
+        int rotationDegree = 90;
+        @SuppressLint("UnsafeExperimentalUsageError") Image mediaImage = imageProxy.getImage();
+        if (mediaImage != null) {
+            InputImage image =
+                    InputImage.fromMediaImage(mediaImage, imageProxy.getImageInfo().getRotationDegrees());
+
+
+            TextRecognizer detector = TextRecognition.getClient();
+            detector.process(image).addOnSuccessListener(new OnSuccessListener<Text>() {
+                @Override
+                public void onSuccess(Text text) {
+                    Toast.makeText(MainActivity.this, text.getText(), Toast.LENGTH_SHORT).show();
+
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.e(String.valueOf(e),String.valueOf(e));
+                }
+            });
+        }
+    }
+
+    private void setPalletecolors(Bitmap bitmap) {
+
         int c=1;
         try {
-            bitmap = toBitmap(image);
+
             Palette p = Palette.from(bitmap).generate();
             int vib=p.getVibrantColor(Color.TRANSPARENT);
             int light_vib=p.getLightVibrantColor(Color.TRANSPARENT);
