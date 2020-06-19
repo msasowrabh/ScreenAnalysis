@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gallery_text">
+    tools:context=".Gallery_text"
+    >
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/textDisplay"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/textDisplay"
+        />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="light_vibrant"
+            android:id="@+id/light_vibrant_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="vibrant"
+            android:id="@+id/vibrant_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dark_vibrant"
+            android:id="@+id/dark_vibrant_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="light_muted"
+            android:id="@+id/light_muted_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="muted"
+            android:id="@+id/muted_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dark_muted"
+            android:id="@+id/dark_muted_color"/></LinearLayout>
+
+</RelativeLayout>

@@ -29,6 +29,7 @@ import java.io.IOException;
 public class Gallery_image extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     public static String resultText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,26 +50,19 @@ public class Gallery_image extends AppCompatActivity {
             try {
                 Bitmap bitmap=MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
                 Palette p = Palette.from(bitmap).generate();
+                Intent intent=new Intent(Gallery_image.this,Gallery_text.class);
                 int vib=p.getVibrantColor(Color.TRANSPARENT);
                 int light_vib=p.getLightVibrantColor(Color.TRANSPARENT);
                 int dark_vib=p.getDarkVibrantColor(Color.TRANSPARENT);
                 int muted=p.getMutedColor(Color.TRANSPARENT);
                 int light_muted=p.getLightMutedColor(Color.TRANSPARENT);
                 int dark_muted=p.getDarkMutedColor(Color.TRANSPARENT);
-                TextView t=(TextView) findViewById(R.id.vibrant_color);
-                t.setBackgroundColor(vib);
-                t=(TextView)findViewById(R.id.dark_vibrant_color);
-                t.setBackgroundColor(dark_vib);
-                t=(TextView)findViewById(R.id.dark_muted_color);
-                t.setBackgroundColor(dark_muted);
-                t=(TextView)findViewById(R.id.light_muted_color);
-                t.setBackgroundColor(light_muted);
-                t=(TextView)findViewById(R.id.light_muted_color);
-                t.setBackgroundColor(light_muted);
-                t=(TextView)findViewById(R.id.light_vibrant_color);
-                t.setBackgroundColor(light_vib);
-                t=(TextView)findViewById(R.id.muted_color);
-                t.setBackgroundColor(muted);
+                intent.putExtra("vibrant",vib);
+                intent.putExtra("dark_vibrant",dark_vib);
+                intent.putExtra("light_vibrant",light_vib);
+                intent.putExtra("muted",muted);
+                intent.putExtra("dark_muted",dark_muted);
+                intent.putExtra("light_muted",light_muted);
                 Recognizetext(bitmap);
 
 
