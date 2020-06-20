@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ScreenAnalysis</string>
     <string name="helloo_ptg">Helloo ptg</string>
+    <string name="view_text">View Text</string>
 </resources>

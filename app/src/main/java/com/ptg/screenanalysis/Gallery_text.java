@@ -12,9 +12,9 @@ public class Gallery_text extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery_text2);
         String result=getIntent().getExtras().getString("ResultText");
-        int vib=getIntent().getExtras().getInt("vib");
-        int dark_vib=getIntent().getExtras().getInt("dark_vib");
-        int light_vib=getIntent().getExtras().getInt("light_vib");
+        int vib=getIntent().getExtras().getInt("vibrant");
+        int dark_vib=getIntent().getExtras().getInt("dark_vibrant");
+        int light_vib=getIntent().getExtras().getInt("light_vibrant");
         int muted=getIntent().getExtras().getInt("muted");
         int dark_muted=getIntent().getExtras().getInt("dark_muted");
         int light_muted=getIntent().getExtras().getInt("light_muted");
@@ -24,17 +24,17 @@ public class Gallery_text extends AppCompatActivity {
         TextView vibrant= findViewById(R.id.vibrant_color);
         vibrant.setBackgroundColor(vib);
         TextView dark_vibrant=findViewById(R.id.dark_vibrant_color);
-        vibrant.setBackgroundColor(dark_vib);
+        dark_vibrant.setBackgroundColor(dark_vib);
 
         TextView dark_mutedview=findViewById(R.id.dark_muted_color);
-        vibrant.setBackgroundColor(dark_muted);
+        dark_mutedview.setBackgroundColor(dark_muted);
 
         TextView light_mutedview=findViewById(R.id.light_muted_color);
-        vibrant.setBackgroundColor(light_muted);
+        light_mutedview.setBackgroundColor(light_muted);
         TextView light_vibrant=findViewById(R.id.light_vibrant_color);
-        vibrant.setBackgroundColor(light_vib);
+        light_vibrant.setBackgroundColor(light_vib);
         TextView mutedview=findViewById(R.id.muted_color);
-        vibrant.setBackgroundColor(muted);
+        mutedview.setBackgroundColor(muted);
         display.setText(result);
     }
 }

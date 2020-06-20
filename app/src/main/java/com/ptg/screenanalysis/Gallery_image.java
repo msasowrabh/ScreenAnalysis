@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +28,12 @@ import java.io.IOException;
 public class Gallery_image extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     public static String resultText;
+    public static int vib;
+    public static int light_vib;
+    public static int dark_vib;
+    public static int muted;
+    public static int light_muted;
+    public static int dark_muted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,18 +56,13 @@ public class Gallery_image extends AppCompatActivity {
                 Bitmap bitmap=MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
                 Palette p = Palette.from(bitmap).generate();
                 Intent intent=new Intent(Gallery_image.this,Gallery_text.class);
-                int vib=p.getVibrantColor(Color.TRANSPARENT);
-                int light_vib=p.getLightVibrantColor(Color.TRANSPARENT);
-                int dark_vib=p.getDarkVibrantColor(Color.TRANSPARENT);
-                int muted=p.getMutedColor(Color.TRANSPARENT);
-                int light_muted=p.getLightMutedColor(Color.TRANSPARENT);
-                int dark_muted=p.getDarkMutedColor(Color.TRANSPARENT);
-                intent.putExtra("vibrant",vib);
-                intent.putExtra("dark_vibrant",dark_vib);
-                intent.putExtra("light_vibrant",light_vib);
-                intent.putExtra("muted",muted);
-                intent.putExtra("dark_muted",dark_muted);
-                intent.putExtra("light_muted",light_muted);
+                vib=p.getVibrantColor(Color.TRANSPARENT);
+                light_vib=p.getLightVibrantColor(Color.TRANSPARENT);
+                dark_vib=p.getDarkVibrantColor(Color.TRANSPARENT);
+                muted=p.getMutedColor(Color.TRANSPARENT);
+                light_muted=p.getLightMutedColor(Color.TRANSPARENT);
+                dark_muted=p.getDarkMutedColor(Color.TRANSPARENT);
+
                 Recognizetext(bitmap);
 
 
@@ -112,7 +112,13 @@ public class Gallery_image extends AppCompatActivity {
                                 resultText=VisionText.getText();
                                 Log.d("Text from Image",resultText);
                                 Intent intent=new Intent(Gallery_image.this,Gallery_text.class);
+                                intent.putExtra("dark_vibrant",dark_vib);
+                                intent.putExtra("light_vibrant",light_vib);
+                                intent.putExtra("muted",muted);
+                                intent.putExtra("dark_muted",dark_muted);
+                                intent.putExtra("light_muted",light_muted);
                                 intent.putExtra("ResultText",resultText);
+                                intent.putExtra("vibrant",vib);
                                 startActivity(intent);
 
 
