@@ -21,6 +21,7 @@ public class Gallery_text extends AppCompatActivity {
 
 
         TextView display=findViewById(R.id.textDisplay);
+        TextView specialChar=findViewById(R.id.special_char_dispalay);
         TextView vibrant= findViewById(R.id.vibrant_color);
         vibrant.setBackgroundColor(vib);
         TextView dark_vibrant=findViewById(R.id.dark_vibrant_color);
@@ -35,6 +36,26 @@ public class Gallery_text extends AppCompatActivity {
         light_vibrant.setBackgroundColor(light_vib);
         TextView mutedview=findViewById(R.id.muted_color);
         mutedview.setBackgroundColor(muted);
-        display.setText(result);
+
+        String normalText=findNormalText(result);
+        String specialCharText=findSpecialChar(result);
+        specialChar.setText(specialCharText);
+        display.setText(normalText);
     }
+
+    private String findSpecialChar(String text) {
+        String result="";
+        result = text.replaceAll("[a-zA-Z0-9\n]", "");
+
+
+        return result;
+    }
+
+    private String findNormalText(String text) {
+        String result="";
+        result = text.replaceAll("[^a-zA-Z0-9]", "");
+
+        return result;
+    }
+
 }
